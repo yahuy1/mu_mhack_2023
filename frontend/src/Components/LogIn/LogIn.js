@@ -29,14 +29,12 @@ function LogIn() {
         try {
             if (email && password)
                 await signInUser(email, password); 
-            navigate("/feed")
+                navigate("/feed")
         } catch {
             console.log("Failed to sign in user");
         }
 
     };
-
-
 
     return (
         <div className="flex-container">

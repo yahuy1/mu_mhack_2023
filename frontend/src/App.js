@@ -16,7 +16,7 @@ function App() {
       <div className="App">
         <UserContextProvider>
           <Routes>
-            <PrivateRoute path="/feed" element={<Feed />} />
+            <Route path="/feed" element={<Feed />} />
             <Route path="/sign_up" element={<Sign_Up />}/>
             <Route path="/log_in" element={<LogIn/>} />
           </Routes>

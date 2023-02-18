@@ -14,7 +14,7 @@
         "email": "steve@codingthesmartway.com",
         "techStack": ["python", "html"],
         "description": "I am 2",
-        "contacts": "@dom"
+        "contacts": "@hey"
         },
         {
         "id": 3,
@@ -22,7 +22,7 @@
         "email": "ann@codingthesmartway.com",
         "techStack": ["flask", "css","mongodb"],
         "description": "I am 3",
-        "contacts": "@dom"
+        "contacts": "@yes123"
         }
     ]
 }

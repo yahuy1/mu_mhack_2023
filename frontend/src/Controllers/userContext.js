@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    const unsubscribe = onAuthStateChanged(auth, (res) => {
+    const unsubscribe = onAuthStateChanged( auth, (res) => {
       if (res) {
         setUser(res);
       } else {
@@ -57,6 +57,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    console.log(auth.currentUser.uid);
     signOut(auth);
   };
 

@@ -4,9 +4,9 @@ import { useUserContext } from "../../Controllers/userContext";
 import Feed from "../Feed/Feed";
 
 export default function ProtectedRoute({ component: Component, ...rest }) {
-  const { user } = useUserContext();
-
+  const { user, loading } = useUserContext();
+  console.log("xxx.inside-protected-route" + user);
   return (
-    user ? <Feed/> : <Navigate to="/log_in" />
+    loading? <h2> Loading </h2> : user ? <Feed/> : <Navigate to="/log_in" />
   )
 }

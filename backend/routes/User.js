@@ -36,6 +36,7 @@ router.post('/login', async (req, res) => {
     // Create user in Firebase Authentication
     const userRecord = await admin.auth().getUserByEmail(email);
     const { uid } = userRecord;
+    console.log()
     res.status(200).json({ message: 'User login successful', uid });
   } catch (error) {
     console.error(error);

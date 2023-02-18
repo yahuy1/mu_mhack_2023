@@ -11,6 +11,7 @@ admin.initializeApp({
 
 const Individual = require('../models/individualModel');
 
+var uid;
 // Route for user sign-up
 router.post('/signup', async (req, res) => {
   try {
@@ -20,8 +21,8 @@ router.post('/signup', async (req, res) => {
     console.log("email: " + email + ", password: " + password);
     // Create user in Firebase Authentication
     const userRecord = await admin.auth().createUser({ email, password });
-    res.status(201).json({ message: 'User sign up successfully', uid: userRecord.uid });
-
+    uid = userRecord.uid;
+    res.status(201).json({ message: 'User sign up successfully', uid });
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: 'Failed to sign up user' });
@@ -45,6 +46,36 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
+    try {
+      console.log("req.body: " + JSON.stringify(req.body));
+      const { name, member, techStack, description, interests, contacts, token } = req.body;
+      const size = await Individual.countDocuments();
+      const uid = res.locals.uid;
+      id = uid; searching = true; matched = [];
+      console.log("id: " + id + ", member: " + member);
+      // Create user in Firebase Authentication
+
+      const result = await Individual.create({
+          "id": id,
+          "name": name,
+          "member": member,
+          "techStack": techStack,
+          "description": description,
+          "interests": interests,
+          "searching": searching,
+          "matched": matched,
+          "contacts": contacts
+      });
+
+      console.log("result: " + result);
+      res.status(201).json({ message: 'User profile created successfully'});
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({ message: 'Failed to create user' });
+    }
+  });
+
+  router.put('/create', async (req, res) => {
     try {
       console.log("req.body: " + JSON.stringify(req.body));
       const { name, member, techStack, description, interests, contacts} = req.body;

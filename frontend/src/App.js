@@ -1,13 +1,20 @@
 import React from 'react'
 import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
 import Feed from './Components/Feed/Feed.js'
 import Sign_Up from './Components/Sign_Up/Sign_Up.js'
 
 function App() {
   return (
-    <div className="App">
-      <Feed/>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/sign_up" element={<Sign_Up />}/>
+          <Route path="/feed" element={<Feed />} />
+        </Routes>
+      </div>
+      </Router>
   );
 }
 

@@ -1,34 +1,26 @@
-import React, { useState } from 'react'
-import './Card.css'
+import React from 'react';
+import './Card.css';
 
-function Card() {
-    const [title, setTitle] = useState('My Title');
-    const [skills, setSkills] = useState(['React', 'JavaScript', 'HTML', 'CSS']);
-    const [description, setDescription] = useState('My Description');
-
-    const handleTitleChange = event => setTitle(event.target.value);
-    const handleSkillsChange = event => setSkills(event.target.value.split(','));
-    const handleDescriptionChange = event => setDescription(event.target.value);
-
-    return (
-        <div className='card-container'>
-            <div className='card-title'>
-                <h2>
-                    <input type="text" readonly='readonly' value={title} onChange={handleTitleChange} />
-                </h2>
+const Card = ({ name, skills, description }) => {
+  return (
+    <div className="user-container">
+      <div className="user-name">{name}</div>
+      <div className="technical-skills">
+        <div className="skills-title">Technical Skills</div>
+        <div className="skills-list">
+          {skills.map((skill, index) => (
+            <div key={index} className="skill-item">
+              {skill}
             </div>
-            <p>Skills:</p>
-            <div className='card-skills'>
-                <input type="text" readonly='readonly' value={skills.join(',')} onChange={handleSkillsChange} />
-            </div>
-            <p>Description:</p>
-            <div className='card-description'>
-                <p>
-                    <textarea readonly='readonly' value={description} onChange={handleDescriptionChange} />
-                </p>
-            </div>
+          ))}
         </div>
-    );
-}
+      </div>
+      <div className="description">
+        <div className="description-title">Short Description</div>
+        <div className="description-text">{description}</div>
+      </div>
+    </div>
+  );
+};
 
 export default Card;

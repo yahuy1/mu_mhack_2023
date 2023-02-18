@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import Select from "react-select";
-import './UserProfile.css'
+import './UserProfile.css';
 import { selectOptions } from './Data';
+import Radio from './Radio';
 
 function UserProfile() {
 
     const [username, setUsername] = useState('');
     const [description, setDescription] = useState('');
+    const [member, setMember] = useState([]);
+    const [contact, setContact] = useState('');
+
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -23,6 +27,14 @@ function UserProfile() {
         // Add code to submit form data to backend here
     };
 
+    const handleContactChange = (event) => {
+        setContact(event.target.value);
+    }
+
+    const handleMemberChange = (event) => {
+        setMember(event.target.value);
+    }
+
     return (
         <div className="container">
             <h1>Update Your Profile</h1>
@@ -38,17 +50,38 @@ function UserProfile() {
                         />
                     </label>
 
+                    <label> Participating as: <Radio /></label>
+
+                    <label> Members
+                        <input
+                            defaultValue=""
+                            type="text"
+                            name="members"
+                            onChange={handleMemberChange}
+                        />
+                    </label>
+
                     <label className='skill-label'>Technical Skills: <CustomSelect /></label>
 
                     <label>A short description about yourself:
                         <textarea
-                            defaultValue={'Eat ass'}
+                            defaultValue='Eat ass'
                             name="user-description"
                             rows={5}
                             wrap="hard"
                             onChange={handleDescriptionChange}
                         />
                     </label>
+
+                    <label>Discord:
+                        <input
+                            type="text"
+                            name="contact"
+                            onChange={handleContactChange}
+
+                        />
+                    </label>
+
                 </fieldset>
                 <input type="submit" value="Save" />
             </form>

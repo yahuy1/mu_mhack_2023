@@ -13,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/sign_up" element={<Sign_Up />}/>
           <Route path="/feed" element={<Feed />} />
+          <Route path="/log_in" element={<LogIn/>} />
         </Routes>
       </div>
       </Router>

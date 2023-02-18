@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import './LogIn.css';
 
 function LogIn() {
@@ -36,6 +37,7 @@ function LogIn() {
                         <input type="password" name="password" onChange={handleEmailChange} required/>
                         <br />
                         <input type="submit" value="SUBMIT" className="submit-btn" />
+                        <Link to='/sign_up'>Sign up now</Link>
                     </form>
                 </div>
             </div>

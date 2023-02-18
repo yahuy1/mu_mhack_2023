@@ -31,9 +31,9 @@ router.get("/", async (req, res) => {
             $nin: fromObj.interacted,
             $nin: fromObj.matched,
         },
-        "techStack": {
-            $in: fromObj.techStack
-        }
+        // "techStack": {
+            // $in: fromObj.techStack
+        // }
     }).limit(10)
 
     res

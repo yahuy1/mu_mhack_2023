@@ -8,6 +8,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
+
 // Route for user sign-up
 router.post('/signup', async (req, res) => {
   try {
@@ -19,6 +20,7 @@ router.post('/signup', async (req, res) => {
     // Create user in Firebase Authentication
     const userRecord = await admin.auth().createUser({ email, password });
     res.status(201).json({ message: 'User created successfully', uid: userRecord.uid });
+
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: 'Failed to create user' });

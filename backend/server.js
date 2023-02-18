@@ -17,8 +17,8 @@ app.get("/", (req, res) => {
 const interactRouter = require("./routes/interactRouter");
 app.use("/api/interact", interactRouter);
 
-const User = require("./routes/User")
-app.use("/api/user", User);
+const userRouter = require("./routes/userRouter")
+app.use("/api/user", userRouter);
 
 const feedRouter = require("./routes/feedRouter")
 app.use("/api/feed", feedRouter)

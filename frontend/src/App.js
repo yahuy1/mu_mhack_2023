@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 
 import Feed from './Components/Feed/Feed.js'
 import LogIn from './Components/LogIn/LogIn';
@@ -16,8 +16,9 @@ function App() {
       <div className="App">
         <UserContextProvider>
           <Routes>
+            <Route path="/" element={<Navigate to="/feed" />} />
             <Route
-              path="/feed/*"
+              path="/feed"
               element={<ProtectedRoute />}
             />
             <Route path="/sign_up" element={<Sign_Up />} />

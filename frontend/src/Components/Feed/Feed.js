@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import './Feed.css'
+import './Feed.css'
 import Card from '../Card/Card';
-import LeftButton from '../Button/LeftButton';
-import RightButton from '../Button/RightButton';
+import Button from '../Button/Button';
 import LogOutButton from '../Button/LogOutButton';
 
 import { useUserContext } from '../../Controllers/userContext';
@@ -27,20 +26,19 @@ const Feed = () => {
 
   return (
     <div className="container">
-      <Card
-        name="Nhut Do"
-        skills={["react", "java"]}
-        description="Sth"
-      />
-      <LeftButton onClick={swipeLeft}>
-        Left
-      </LeftButton>
-      <RightButton onClick={swipeRight}>
-        Right
-      </RightButton>
-      <LogOutButton onClick={logoutUser}>
-        Logout
-      </LogOutButton>
+      <div className="card-container">
+        <Card
+          name="Nhut Do"
+          skills={["react", "java"]}
+          description="Sth"
+        />
+      </div>
+      <div className="button-container">
+        <Button onClick={swipeLeft} button_type="Left" button_css="button-left"/>
+        <Button onClick={logoutUser} button_type="LogOut" button_css="button-logout"/>
+        <Button onClick={swipeRight} button_type="Right" button_css="button-right"/>
+
+      </div>
 
     </div>
   );

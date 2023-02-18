@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const teamSchema = mongoose.Schema({
     id: {
-        type: Number,
+        type: String,
         required: true
     },
     name: {
@@ -17,8 +17,8 @@ const teamSchema = mongoose.Schema({
         type: Array,
         required: true
     },
-    ideas: {
-        type: Array,
+    description: {
+        type: String,
         required: true
     },  
     interests: {
@@ -32,10 +32,10 @@ const teamSchema = mongoose.Schema({
     matched: {
         type: Array,
         required: true
-    },
-    contact: {
+    }, 
+    contacts: {
         type: Array,
-        require: true
+        required: true
     },
     interacted: {
         type: Array,

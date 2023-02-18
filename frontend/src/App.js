@@ -1,15 +1,12 @@
 import React from 'react'
 import './App.css'
-import SignUp from './Components/Sign_Up/Sign_Up'
+import Feed from './Components/Feed/Feed.js'
+import Sign_Up from './Components/Sign_Up/Sign_Up.js'
 
 function App() {
   return (
     <div className="App">
-      <Card
-        name="John Smith"
-        skills={['React', 'JavaScript', 'CSS', 'C++', 'C#']}
-        description="I'm a front-end developer with 3 years of experience. I specialize in building responsive user interfaces with React."
-      />
+      <Feed/>
     </div>
   );
 }

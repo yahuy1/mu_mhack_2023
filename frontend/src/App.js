@@ -16,7 +16,7 @@ function App() {
       <div className="App">
         <UserContextProvider>
           <Routes>
-            {loading ?  <h2> Loading </h2>: user ? <Route path="/" element={<Navigate to="/feed" />} /> : <Route path="/" element={<Navigate to="/log_in" />} />}
+            {/* {loading ?  <h2> Loading </h2>: user ? <Route path="/" element={<Navigate to="/feed" />} /> : <Route path="/" element={<Navigate to="/log_in" />} />} */}
             <Route
               path="/feed"
               element={<ProtectedRoute />}

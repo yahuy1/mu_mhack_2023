@@ -5,7 +5,9 @@ import {
     onAuthStateChanged,
     signOut,
     updateProfile,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    setPersistence,
+    browserLocalPersistence,
     } from 'firebase/auth';
 import { auth } from '../Configs/firebase';
 
@@ -23,7 +25,7 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    const unsubscribe = onAuthStateChanged( auth, (res) => {
+    const unsubscribe = onAuthStateChanged(auth, (res) => {
       if (res) {
         setUser(res);
       } else {

@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import Feed from './Components/Feed/Feed.js'
+import LogIn from './Components/LogIn/LogIn';
 import Sign_Up from './Components/Sign_Up/Sign_Up.js'
 
 function App() {

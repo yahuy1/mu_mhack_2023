@@ -28,43 +28,32 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // Create user in Firebase Authentication
-    const userRecord = await admin.auth().getUserByEmail(email);
-    const { uid } = userRecord;
-    res
-      .status(200)
-      .json({ message: "User login successful", uid });
-  } catch (error) {
-    res
-      .status(401)
-      .json({ message: "Failed to log in user" });
-  }
-});
-
 router.post("/create", async (req, res) => {
   try {
-    const { uid, userType, name, member, techStack, description, interests, contacts } = req.body;
-    const id = uid
-    const searching = true;
-    const matched = [];
+    const { id, userType, name, member, techStack, description, contacts } = req.body;
+    const searching = true
+    const interests = []
+    const matched = []
+    const interacted = []
     // Create user in Firebase Authentication
 
     let fromCollection = (userType === "Team") ? Team : Individual
     const user = new fromCollection({
       id: id,
       name: name,
-      member: member,
       techStack: techStack,
       description: description,
       interests: interests,
       searching: searching,
       matched: matched,
       contacts: contacts,
+      interacted: interacted
     });
+
+    if (userType === "Team") {
+      user.member = member
+    }
+
     user.save()
 
     res
@@ -79,26 +68,25 @@ router.post("/create", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   try {
-    const { uid, userType, name, member, techStack, description, interests, contacts } = req.body;
-    const id = uid
-    const searching = true;
-    const matched = [];
+    const { id, userType, name, member, techStack, description, contacts, searching, interests, matched, interacted } = req.body;
     // Create user in Firebase Authentication
 
     let fromCollection = (userType === "Team") ? Team : Individual
     let user = await fromCollection.findOne({id : id})
 
-    user = {
-      id: id,
-      name: name,
-      member: member,
-      techStack: techStack,
-      description: description,
-      interests: interests,
-      searching: searching,
-      matched: matched,
-      contacts: contacts,
+    user.name = name
+    user.techStack = techStack
+    user.description = description
+    user.interests = interests
+    user.searching = searching
+    user.matched = matched
+    user.contacts = contacts
+    user.interacted = interacted
+
+    if (userType === "Team") {
+      user.member = member
     }
+
     user.save()
     
     res

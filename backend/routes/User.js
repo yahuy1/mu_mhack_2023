@@ -8,7 +8,6 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-
 // Route for user sign-up
 router.post('/signup', async (req, res) => {
   try {

@@ -26,18 +26,19 @@ const Feed = () => {
 
   return (
     <div className="container">
-      <Card
-        name="Nhut Do"
-        skills={["react", "java"]}
-        description="Sth"
-      />
+      <div className="card-container">
+        <Card
+          name="Nhut Do"
+          skills={["react", "java"]}
+          description="Sth"
+        />
+      </div>
       <div className="button-container">
         <Button onClick={swipeLeft} button_type="Left" button_css="button-left"/>
+        <Button onClick={logoutUser} button_type="LogOut" button_css="button-logout"/>
         <Button onClick={swipeRight} button_type="Right" button_css="button-right"/>
+
       </div>
-      <LogOutButton onClick={logoutUser}>
-        Logout
-      </LogOutButton>
 
     </div>
   );

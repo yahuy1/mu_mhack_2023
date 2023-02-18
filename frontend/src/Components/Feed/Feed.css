@@ -3,13 +3,15 @@
     flex-direction: column;
     flex-wrap: wrap;
     row-gap: 50%;
+    height: 100%;
   }
   .card-container {
-    height: 50%;
+    height: 80%;
   }
 
   .button-container {
     display: flex;
+    justify-content: center;
     height: 10%;
     width: 20%;
     column-gap: 20px;

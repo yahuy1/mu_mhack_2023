@@ -1,0 +1,42 @@
+  .button {
+    width: 50%;
+    height: 20%;
+    padding: 10% 10%;
+    border-radius: 5%;
+    /* background-color: #007bff; */
+    color: #fff;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .button-right {
+    background-color: chartreuse;
+    width: 50%;
+    height: 20%;
+    padding: 10% 10%;
+    border-radius: 5%;
+    color: #fff;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+  }
+  .button-left {
+    background-color: crimson;
+    width: 50%;
+    height: 20%;
+    padding: 10% 10%;
+    border-radius: 5%;
+    color: #fff;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0062cc;
+  }

@@ -1,12 +1,12 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import Card from './Components/Card/Card'
+import SignUp from './Components/Sign_Up/Sign_Up'
 
 function App() {
   return (
     <div className="App">
-      <Card />
+      <SignUp />
     </div>
   );
 }

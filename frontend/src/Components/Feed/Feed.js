@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import './Feed.css'
 import Card from '../Card/Card';
-import Button from '../Button/Button';
+import LeftButton from '../Button/LeftButton';
+import RightButton from '../Button/RightButton';
+import LogOutButton from '../Button/LogOutButton';
+
+import { useUserContext } from '../../Controllers/userContext';
 
 const Feed = () => {
-const [interest, setInterest] = useState(-1);
+  const [interest, setInterest] = useState(-1);
+  const { user, logoutUser } = useUserContext();
+
   const swipeLeft = (event) => {
     // Handle button click event here
     let newInterest = 0;
@@ -17,19 +23,25 @@ const [interest, setInterest] = useState(-1);
     setInterest(newInterest);
   }
 
+  const logOut = (event) => { }
+
   return (
     <div className="container">
-      <div className="card-container">
-        <Card
-          name="Nhut Do"
-          skills={["react", "java"]}
-          description="Sth"
-        />
-      </div>
-      <div className="button-container">
-        <Button onClick={swipeLeft} button_type="Left" button_css="button-left"/>
-        <Button onClick={swipeRight} button_type="Right" button_css="button-right"/>
-      </div>
+      <Card
+        name="Nhut Do"
+        skills={["react", "java"]}
+        description="Sth"
+      />
+      <LeftButton onClick={swipeLeft}>
+        Left
+      </LeftButton>
+      <RightButton onClick={swipeRight}>
+        Right
+      </RightButton>
+      <LogOutButton onClick={logoutUser}>
+        Logout
+      </LogOutButton>
+
     </div>
   );
 };

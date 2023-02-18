@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 import axios from 'axios'
 
 import { useUserContext } from '../../Controllers/userContext';
+import { redirect } from "react-router-dom";
 
 const Feed = () => {
   const [interest, setInterest] = useState(-1);
@@ -34,7 +35,9 @@ const Feed = () => {
     setInterest(newInterest);
   }
 
-  const logOut = (event) => { }
+  const logOut =  async (event) => {
+    logoutUser();
+  }
 
   return (
     <div className="container">
@@ -47,7 +50,7 @@ const Feed = () => {
       </div>
       <div className="button-container">
         <Button onClick={swipeLeft} button_type="Left" button_css="button-left"/>
-        <Button onClick={logoutUser} button_type="LogOut" button_css="button-logout"/>
+        <Button onClick={logOut} button_type="LogOut" button_css="button-logout"/>
         <Button onClick={swipeRight} button_type="Right" button_css="button-right"/>
 
       </div>

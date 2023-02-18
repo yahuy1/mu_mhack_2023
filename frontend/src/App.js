@@ -1,14 +1,22 @@
 import React from 'react'
 import './App.css'
-import Card from './Components/Card/Card';
-import Sign_Up from './Components/Sign_Up/Sign_Up';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+import Feed from './Components/Feed/Feed.js'
 import LogIn from './Components/LogIn/LogIn';
+import Sign_Up from './Components/Sign_Up/Sign_Up.js'
 
 function App() {
   return (
-    <div className="App">
-      <LogIn/>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/sign_up" element={<Sign_Up />}/>
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/log_in" element={<LogIn/>} />
+        </Routes>
+      </div>
+      </Router>
   );
 }
 

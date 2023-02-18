@@ -54,7 +54,7 @@ h1 {
 
 .content-container {
   width: 500px;
-  height: 350px;
+  height: 100%;
 }
 
 .form-container {
@@ -63,7 +63,7 @@ h1 {
   align-items: center;
 
   width: 500px;
-  height: 350px;
+  height: 100%;
 
   margin-top: 5px;
   padding-top: 20px;

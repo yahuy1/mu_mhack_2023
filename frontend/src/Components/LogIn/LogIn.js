@@ -36,8 +36,6 @@ function LogIn() {
 
     };
 
-
-
     return (
         <div className="flex-container">
             <div className="content-container">

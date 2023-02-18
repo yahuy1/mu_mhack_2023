@@ -2,15 +2,11 @@ const mongoose = require("mongoose");
 
 const individualSchema = mongoose.Schema({
     id: {
-        type: Number,
+        type: String,
         required: true
     },
     name: {
         type: String,
-        required: true
-    },
-    member: {
-        type: Array,
         required: true
     },
     techStack: {

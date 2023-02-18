@@ -4,7 +4,6 @@ const dotenv = require("dotenv").config()
 const cors = require("cors")
 
 const app = express()
-const User = require("./routes/User")
 app.use(cors({origin: true}))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -17,7 +16,12 @@ app.get("/", (req, res) => {
 
 const interactRouter = require("./routes/interactRouter");
 app.use("/api/interact", interactRouter);
+
+const User = require("./routes/User")
 app.use("/user", User);
+
+const feedRouter = require("./routes/feedRouter")
+app.use("/api/feed", feedRouter)
 
 
 mongoose.set('strictQuery', false);

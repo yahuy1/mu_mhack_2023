@@ -1,0 +1,28 @@
+{
+    "employees": [
+        {
+        "id": 1,
+        "name": "Sebastian",
+        "email": "sebastian@codingthesmartway.com",
+        "techStack": ["react", "django"],
+        "description": "I am 1",
+        "contacts": "@dom"
+        },
+        {
+        "id": 2,
+        "name": "Steve",
+        "email": "steve@codingthesmartway.com",
+        "techStack": ["python", "html"],
+        "description": "I am 2",
+        "contacts": "@dom"
+        },
+        {
+        "id": 3,
+        "name": "Ann",
+        "email": "ann@codingthesmartway.com",
+        "techStack": ["flask", "css","mongodb"],
+        "description": "I am 3",
+        "contacts": "@dom"
+        }
+    ]
+}

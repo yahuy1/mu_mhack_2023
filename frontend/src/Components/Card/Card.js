@@ -1,7 +1,19 @@
 import React from 'react';
 import './Card.css';
+import axios from 'axios'
 
 const Card = ({ name, skills, description }) => {
+  state = {
+    cardInfo: {}
+  }
+  componentDidMount() {
+    axios.get('https://localhost:3000/employees')
+    .then(res => {
+      const card = res.data;
+      this.setState({card});
+    })
+  }
+
   return (
     <div className="user-container">
       <div className="user-name">{name}</div>

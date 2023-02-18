@@ -2,13 +2,25 @@ import React, { useEffect, useState } from "react";
 import './Feed.css'
 import Card from '../Card/Card';
 import Button from '../Button/Button';
-import LogOutButton from '../Button/LogOutButton';
+import axios from 'axios'
 
 import { useUserContext } from '../../Controllers/userContext';
 
 const Feed = () => {
   const [interest, setInterest] = useState(-1);
   const { user, logoutUser } = useUserContext();
+  const {info, setInfo} = useState
+
+  info = {
+    pe: {}
+  }
+  componentDidMount() {
+    axios.get('https://localhost:3000/employees')
+    .then(res => {
+      const card = res.data;
+      this.setInfo({card});
+    })
+  }
 
   const swipeLeft = (event) => {
     // Handle button click event here
@@ -39,7 +51,6 @@ const Feed = () => {
         <Button onClick={swipeRight} button_type="Right" button_css="button-right"/>
 
       </div>
-
     </div>
   );
 };

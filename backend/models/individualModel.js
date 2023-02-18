@@ -36,8 +36,11 @@ const individualSchema = mongoose.Schema({
     contacts: {
         type: Array,
         required: true
+    },
+    interacted: {
+        type: Array,
+        require: true
     }
-    
 })
 
 module.exports = mongoose.model("Individual", individualSchema);

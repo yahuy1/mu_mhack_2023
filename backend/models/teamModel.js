@@ -18,7 +18,7 @@ const teamSchema = mongoose.Schema({
         required: true
     },
     ideas: {
-        type: Object,
+        type: Array,
         required: true
     },  
     interests: {
@@ -36,9 +36,12 @@ const teamSchema = mongoose.Schema({
     contact: {
         type: Array,
         require: true
+    },
+    interacted: {
+        type: Array,
+        require: true
     }
-    
 })
 
-module.exports = mongoose.model("Team", resultSchema);
+module.exports = mongoose.model("Team", teamSchema);
  

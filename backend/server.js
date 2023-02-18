@@ -14,6 +14,9 @@ app.get("/", (req, res) => {
     res.send("Xin chao cac ban nho be!")
 })
 
+const interactRouter = require("./routes/interactRouter");
+app.use("/api/interact", interactRouter);
+
 
 mongoose.set('strictQuery', false);
 mongoose

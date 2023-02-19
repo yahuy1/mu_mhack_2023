@@ -12,10 +12,11 @@
   }
 
   .button-right {
-    background-color: chartreuse;
+    background-color: rgb(101, 156, 45);
     width: 50%;
     height: 20%;
-    padding: 10% 10%;
+    margin: auto;
+    padding: 10% 0px;
     border-radius: 5%;
     color: #fff;
     font-size: 2rem;
@@ -28,7 +29,8 @@
     background-color: crimson;
     width: 50%;
     height: 20%;
-    padding: 10% 10%;
+    margin:auto;
+    padding: 10% 0px;
     border-radius: 5%;
     color: #fff;
     font-size: 2rem;

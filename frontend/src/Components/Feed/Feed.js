@@ -4,7 +4,6 @@ import { TeamCard, IndividualCard } from '../Card/Card';
 import Button from '../Button/Button';
 import axios from 'axios'
 
-
 import { useUserContext } from '../../Controllers/userContext';
 import { Navigate, useNavigate, redirect } from "react-router-dom";
 
@@ -12,14 +11,34 @@ const Feed = () => {
   const [interest, setInterest] = useState(-1);
   const { user, logoutUser } = useUserContext();
   const navigate = useNavigate();
+  const [userType, setUserType] = useState("");
   
   const [infoQueue, setInfoQueue] = useState({
     persons: []
   });
 
-  const userType = user.uid.charAt(0) === 't'? "Team" : "Individual";
-  
+  console.log("in feed, current user: ", user);
   useEffect(() => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/user/info',
+      data: {
+        id: user.uid,
+      }
+    })
+    .then(response => {
+      if (response.status === 204)
+        console.log("No data");
+      else {
+        console.log("userType: ");
+        console.log(response.data.userType);
+        setUserType(response.data.userType);
+      }
+    })
+  },[])
+
+  useEffect(() => {
+    if (userType !== "Team" && userType !== "Individual") return
     axios({
       method: 'post',
       url: 'http://localhost:8080/api/feed',
@@ -34,7 +53,7 @@ const Feed = () => {
       else
         setInfoQueue({persons: response.data});
     })
-  },[])
+  }, [userType])
 
   const removePerson = (index) => {
     // create a copy of the persons array in the infoQueue state
@@ -75,9 +94,9 @@ const Feed = () => {
       method: 'post',
       url: 'http://localhost:8080/api/interact/uninterest/',
       data: {
-          individualID: user.uid,
-          teamID: param,
-          source: userType
+        individualID: userType === "Team" ? param : user.uid,
+        teamID: userType !== "Team" ? param : user.uid,
+        userType: userType
       }
     })
     .then(function (response) {
@@ -88,13 +107,15 @@ const Feed = () => {
   }
 
   const swipeRight = (param) => {
+    console.log("usertype");
+    console.log(userType);
     axios({
       method: 'post',
       url: 'http://localhost:8080/api/interact/interest/',
       data: {
-          individualID: user.uid,
-          teamID: param,
-          source: userType
+          individualID: userType === "Team" ? param : user.uid,
+          teamID: userType !== "Team" ? param : user.uid,
+          userType: userType
       }
     })
     .then(function (response) {
@@ -111,8 +132,8 @@ const Feed = () => {
   return (
     <div className="container">
       <div className="card-container">
-      {infoQueue.persons.length !== 0 && (
-        userType === "Team" ?
+      {infoQueue.persons.length !== 0 ? 
+        (userType !== "Team" ?
         <TeamCard
           name={infoQueue.persons[0].name}
           member={infoQueue.persons[0].member}
@@ -125,8 +146,8 @@ const Feed = () => {
         techStack={infoQueue.persons[0].techStack}
         description={infoQueue.persons[0].description}
         contacts={infoQueue.persons[0].contacts}
-      />
-      )}
+      />) : <div></div>
+      }
       </div>
       <div className="button-container">
         <Button onClick={() => swipeLeft(infoQueue.persons[0].id)} button_type="Left" button_css="button-left"/>

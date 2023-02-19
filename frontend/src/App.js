@@ -28,6 +28,7 @@ function App() {
             <Route path="/log_in" element={<LogIn />} />
             <Route path="/user/matches" element={<Matches />} />
             <Route path="/outofmatched" element={<OutOfMatchedPage />} />
+            <Route path="/" element={<ProtectedRouteFeed />} />
           </Routes>
         </UserContextProvider>
       </div>

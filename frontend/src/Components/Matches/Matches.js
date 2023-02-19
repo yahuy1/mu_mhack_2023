@@ -123,7 +123,7 @@ function Matches() {
                                 <span>
                                     <IndividualCard
                                         name={obj.name}
-                                        techStack={obj.techStack.map(elem => elem.value)}
+                                        techStack={obj.techStack.map(elem => (typeof(elem) === "string" ? elem : elem.value))}
                                         description={obj.description}
                                         contacts='onlyfans.com/JohnDoe'
                                     />

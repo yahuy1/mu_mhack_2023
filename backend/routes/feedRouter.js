@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
     fromObj = await fromCollection.findOne({ id: id })
     if (!fromObj.searching) {
         res
-            .status(201)
+            .status(400)
             .json({ action: "searching mode off" })
         return
     }
@@ -35,6 +35,10 @@ router.post("/", async (req, res) => {
             // $in: fromObj.techStack
         // }
     }).limit(10)
+
+    if (toObj === null) {
+        res.status(204).json({message: "Out of candidates"})
+    }
 
     res
         .status(201)

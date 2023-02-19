@@ -4,13 +4,15 @@ import { TeamCard, IndividualCard } from '../Card/Card';
 import Button from '../Button/Button';
 import axios from 'axios'
 
+
 import { useUserContext } from '../../Controllers/userContext';
-import { redirect } from "react-router-dom";
+import { Navigate, useNavigate, redirect } from "react-router-dom";
 
 const Feed = () => {
   const [interest, setInterest] = useState(-1);
   const { user, logoutUser } = useUserContext();
-
+  const navigate = useNavigate();
+  
   const [infoQueue, setInfoQueue] = useState({
     persons: []
   });
@@ -129,7 +131,9 @@ const Feed = () => {
         <Button onClick={() => swipeLeft(infoQueue.persons[0].id)} button_type="Left" button_css="button-left"/>
         <Button onClick={logOut} button_type="LogOut" button_css="button-logout"/>
         <Button onClick={() => swipeRight(infoQueue.persons[0].id)} button_type="Right" button_css="button-right"/>
-
+      </div>
+      <div className="button-matches">
+        <Button onClick={() => navigate("/user/matches")} button_type="View your matches" button_css="button-matched" />
       </div>
     </div>
   );

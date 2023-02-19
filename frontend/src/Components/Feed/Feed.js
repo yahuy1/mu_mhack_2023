@@ -11,12 +11,10 @@ const Feed = () => {
   const [interest, setInterest] = useState(-1);
   const { user, logoutUser } = useUserContext();
 
-  const [info, setInfo] = useState({
+  const [infoQueue, setInfoQueue] = useState({
     persons: []
-  })
-
-  const [curPersonIdx, setCurPersonIdx] = useState(0);
-
+  });
+  
   useEffect(() => {
     axios({
       method: 'post',
@@ -27,10 +25,43 @@ const Feed = () => {
       }
     })
     .then(response => {
-      setInfo({persons: response.data});
+      setInfoQueue({persons: response.data});
     })
 
   },[])
+
+  const removePerson = (index) => {
+    // create a copy of the persons array in the infoQueue state
+    const newPersons = [...infoQueue.persons];
+    // remove the person at the specified index
+    newPersons.splice(index, 1);
+    // update the infoQueue state with the new persons array
+    setInfoQueue({ ...infoQueue, persons: newPersons });
+  };
+
+  const addPersons = (newPersons) => {
+    // create a copy of the persons array in the infoQueue state
+    const currentPersons = [...infoQueue.persons];
+    // push the new persons onto the array
+    currentPersons.push(...newPersons);
+    // update the infoQueue state with the new persons array
+    setInfoQueue({ ...infoQueue, persons: currentPersons });
+  };  
+
+  const requestNewData = (event) => {
+    if (infoQueue.persons.length > 3) return;
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/feed/',
+      data: {
+          id: user.uid,
+          userType: user.uid.charAt(0) === 't'? "Team" : "Individual"
+      }
+    })
+    .then(function (response) {
+      addPersons(response.data);
+    });
+  }
 
   const swipeLeft = (param) => {
     // Handle button click event here
@@ -45,10 +76,10 @@ const Feed = () => {
     .then(function (response) {
       console.log(response.status);
     });
-    
-    setCurPersonIdx(curPersonIdx+1);
-    console.log("cur idx: " + curPersonIdx);
+    removePerson(0);
+    requestNewData();
   }
+
   const swipeRight = (param) => {
     axios({
       method: 'post',
@@ -61,8 +92,8 @@ const Feed = () => {
     .then(function (response) {
       console.log(response.status);
     });
-    setCurPersonIdx(curPersonIdx+1);
-    console.log("cur idx: " + curPersonIdx);
+    removePerson(0);
+    requestNewData();
   }
 
   const logOut =  async (event) => {
@@ -72,20 +103,20 @@ const Feed = () => {
   return (
     <div className="container">
       <div className="card-container">
-      {info.persons.length !== 0 && (
+      {infoQueue.persons.length !== 0 && (
         <Card
-          name={info.persons[curPersonIdx].name}
-          email={info.persons[curPersonIdx].email}
-          techStack={info.persons[curPersonIdx].techStack}
-          description={info.persons[curPersonIdx].description}
-          contacts={info.persons[curPersonIdx].contacts}
+          name={infoQueue.persons[0].name}
+          email={infoQueue.persons[0].email}
+          techStack={infoQueue.persons[0].techStack}
+          description={infoQueue.persons[0].description}
+          contacts={infoQueue.persons[0].contacts}
         />
       )}
       </div>
       <div className="button-container">
-        <Button onClick={() => swipeLeft(info.persons[curPersonIdx].id)} button_type="Left" button_css="button-left"/>
+        <Button onClick={() => swipeLeft(infoQueue.persons[0].id)} button_type="Left" button_css="button-left"/>
         <Button onClick={logOut} button_type="LogOut" button_css="button-logout"/>
-        <Button onClick={() => swipeRight(info.persons[curPersonIdx].id)} button_type="Right" button_css="button-right"/>
+        <Button onClick={() => swipeRight(infoQueue.persons[0].id)} button_type="Right" button_css="button-right"/>
 
       </div>
     </div>

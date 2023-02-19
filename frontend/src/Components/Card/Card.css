@@ -19,6 +19,10 @@
     margin-bottom: 10px;
   }
   
+  .email {
+    color: rgb(30, 12, 173);
+  }
+
   .technical-skills {
     margin: 10% 0%;
   }
@@ -61,5 +65,9 @@
   .description-text {
     font-size: 200%;
     color: white;
+  }
+
+  .contacts {
+    color: rgb(30, 12, 173);
   }
   

@@ -11,7 +11,6 @@ import ProtectedRouteUserProfile from './Components/ProtectedRouteUserProfile/Pr
 import ProtectedRouteFeed from './Components/ProtectedRouteFeed/ProtectedRouteFeed';
 
 function App() {
-  const { user, loading } = useUserContext();
   return (
     <Router>
       <div className="App">

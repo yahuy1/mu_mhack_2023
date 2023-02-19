@@ -1,68 +1,141 @@
 import React, { useEffect, useState } from "react";
 import './Feed.css'
-import Card from '../Card/Card';
+import { TeamCard, IndividualCard } from '../Card/Card';
 import Button from '../Button/Button';
 import axios from 'axios'
 
+
 import { useUserContext } from '../../Controllers/userContext';
-import { redirect } from "react-router-dom";
+import { Navigate, useNavigate, redirect } from "react-router-dom";
 
 const Feed = () => {
   const [interest, setInterest] = useState(-1);
   const { user, logoutUser } = useUserContext();
-
-  const [info, setInfo] = useState({
+  const navigate = useNavigate();
+  
+  const [infoQueue, setInfoQueue] = useState({
     persons: []
-  })
+  });
 
-  const [curPersonIdx, setCurPersonIdx] = useState(0);
-
+  const userType = user.uid.charAt(0) === 't'? "Team" : "Individual";
+  
   useEffect(() => {
-    axios.get("http://localhost:3000/employees")
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/feed',
+      data: {
+        id: user.uid,
+        userType: userType
+      }
+    })
     .then(response => {
-      setInfo({persons: response.data});
+      if (response.status === 204)
+        console.log("No data");
+      else
+        setInfoQueue({persons: response.data});
     })
 
   },[])
 
-  const swipeLeft = (event) => {
-    // Handle button click event here
-    let newInterest = 0;
-    console.log("xxx2" + newInterest);
-    setInterest(newInterest);
-    setCurPersonIdx(curPersonIdx+1);
-    console.log("cur idx: " + curPersonIdx);
+  const removePerson = (index) => {
+    // create a copy of the persons array in the infoQueue state
+    const newPersons = [...infoQueue.persons];
+    // remove the person at the specified index
+    newPersons.splice(index, 1);
+    // update the infoQueue state with the new persons array
+    setInfoQueue({ ...infoQueue, persons: newPersons });
+  };
+
+  const addPersons = (newPersons) => {
+    // create a copy of the persons array in the infoQueue state
+    const currentPersons = [...infoQueue.persons];
+    // push the new persons onto the array
+    currentPersons.push(...newPersons);
+    // update the infoQueue state with the new persons array
+    setInfoQueue({ ...infoQueue, persons: currentPersons });
+  };  
+
+  const requestNewData = (event) => {
+    if (infoQueue.persons.length > 3) return;
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/feed/',
+      data: {
+          id: user.uid,
+          userType: userType
+      }
+    })
+    .then(function (response) {
+      addPersons(response.data);
+    });
   }
-  const swipeRight = (event) => {
-    let newInterest = 1;
-    console.log("xxx3" + newInterest);
-    setInterest(newInterest);
-    setCurPersonIdx(curPersonIdx+1);
-    console.log("cur idx: " + curPersonIdx);
+
+  const swipeLeft = (param) => {
+    // Handle button click event here
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/interact/uninterest/',
+      data: {
+          individualID: user.uid,
+          teamID: param,
+          source: userType
+      }
+    })
+    .then(function (response) {
+      console.log(response.status);
+    });
+    removePerson(0);
+    requestNewData();
+  }
+
+  const swipeRight = (param) => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/interact/interest/',
+      data: {
+          individualID: user.uid,
+          teamID: param,
+          source: userType
+      }
+    })
+    .then(function (response) {
+      console.log(response.status);
+    });
+    removePerson(0);
+    requestNewData();
   }
 
   const logOut =  async (event) => {
     logoutUser();
   }
-  
+
   return (
     <div className="container">
       <div className="card-container">
-      {info.persons.length !== 0 && (
-        <Card
-          name={info.persons[curPersonIdx].name}
-          email={info.persons[curPersonIdx].email}
-          techStack={info.persons[curPersonIdx].techStack}
-          description={info.persons[curPersonIdx].description}
-          contacts={info.persons[curPersonIdx].contacts}
+      {infoQueue.persons.length !== 0 && (
+        userType === "Team" ?
+        <TeamCard
+          name={infoQueue.persons[0].name}
+          member={infoQueue.persons[0].member}
+          techStack={infoQueue.persons[0].techStack}
+          description={infoQueue.persons[0].description}
+          contacts={infoQueue.persons[0].contacts}
         />
+        : <IndividualCard
+        name={infoQueue.persons[0].name}
+        techStack={infoQueue.persons[0].techStack}
+        description={infoQueue.persons[0].description}
+        contacts={infoQueue.persons[0].contacts}
+      />
       )}
       </div>
       <div className="button-container">
-        <Button onClick={swipeLeft} button_type="Left" button_css="button-left"/>
+        <Button onClick={() => swipeLeft(infoQueue.persons[0].id)} button_type="Left" button_css="button-left"/>
         <Button onClick={logOut} button_type="LogOut" button_css="button-logout"/>
-        <Button onClick={swipeRight} button_type="Right" button_css="button-right"/>
-
+        <Button onClick={() => swipeRight(infoQueue.persons[0].id)} button_type="Right" button_css="button-right"/>
+      </div>
+      <div className="button-matches">
+        <Button onClick={() => navigate("/user/matches")} button_type="View your matches" button_css="button-matched" />
       </div>
     </div>
   );

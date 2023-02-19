@@ -28,6 +28,7 @@ const SelectBar = () => {
 
     const [skills, setSkills] = useState([]);
     const handleSkillsChange = (selected) => {
+        console.log("Skill: " + selected[0]);
         setSkills(selected);
     };
 

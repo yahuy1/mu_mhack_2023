@@ -3,7 +3,7 @@ const router = express.Router()
 const Individual = require("../models/individualModel")
 const Team = require("../models/teamModel")
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     const id = req.body.id
     const userType = req.body.userType
     

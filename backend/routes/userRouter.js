@@ -99,7 +99,7 @@ router.put("/update", async (req, res) => {
   }
 });
 
-router.get("/info", async (req, res) => {
+router.post("/info", async (req, res) => {
   const id = req.body.id
   const fromCollection = (req.body.userType === "Team") ? Team : Individual
   

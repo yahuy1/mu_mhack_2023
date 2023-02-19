@@ -44,7 +44,7 @@ const Feed = () => {
   const logOut =  async (event) => {
     logoutUser();
   }
-  
+
   return (
     <div className="container">
       <div className="card-container">

@@ -9,6 +9,7 @@ import Sign_Up from './Components/Sign_Up/Sign_Up.js'
 import { UserContextProvider, useUserContext } from './Controllers/userContext';
 import ProtectedRouteUserProfile from './Components/ProtectedRouteUserProfile/ProtectedRouteUserProfile';
 import ProtectedRouteFeed from './Components/ProtectedRouteFeed/ProtectedRouteFeed';
+import Matches from './Components/Matches/Matches';
 
 function App() {
   const { user, loading } = useUserContext();
@@ -25,6 +26,7 @@ function App() {
             <Route path="/user/create" element={<ProtectedRouteUserProfile/>}/>
             <Route path="/sign_up" element={<Sign_Up />} />
             <Route path="/log_in" element={<LogIn />} />
+            <Route path="/user/matches" element={<Matches />} />
           </Routes>
         </UserContextProvider>
       </div>

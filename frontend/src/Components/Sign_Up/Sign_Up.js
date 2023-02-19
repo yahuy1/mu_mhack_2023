@@ -3,6 +3,7 @@ import './Sign_Up.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 function Sign_Up() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,15 +18,6 @@ function Sign_Up() {
     };
 
     const handleSubmit = (event) => {
-<<<<<<< HEAD
-        event.preventDefault();
-        console.log('Email:', email);
-        console.log('Password:', password);
-        // Add code to submit form data to backend here
-
-
-        
-=======
         try {
             event.preventDefault();
             console.log('Email:', email);
@@ -36,12 +28,12 @@ function Sign_Up() {
                 password: password
             })
             console.log("Signed up succesfully");
+
             navigate("/user/create");
             
         } catch (error) {
             console.log("Unable to sign up");
         } 
->>>>>>> backend-duong
     };
     
     return (

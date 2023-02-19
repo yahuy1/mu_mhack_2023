@@ -41,10 +41,12 @@ function LogIn() {
                     }
                 })
                 .then(function (response) {
-                    if (!response) {
-                        navigate("/user/create")
+                    console.log("Response from login");
+                    console.log(response);
+                    if (response.status === 204) {
+                        navigate("/user/create");
                     }   else {
-                        navigate("/feed")
+                        navigate("/feed");
                     }
                 });
         } catch {

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LogIn.css';
 import { useUserContext } from '../../Controllers/userContext';
+import axios from 'axios';
 
 
 function LogIn() {
@@ -12,6 +13,7 @@ function LogIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const { signInUser } = useUserContext();
+    const { user, logoutUser } = useUserContext();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -30,11 +32,24 @@ function LogIn() {
             if (email && password)
                 signInUser(email, password);
                 
-                navigate("/feed");
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:8080/api/user/info/',
+                    data: {
+                        id: user.uid,
+                        userType: user.uid.charAt(0) === 't'? "Team" : "Individual"
+                    }
+                })
+                .then(function (response) {
+                    if (!response) {
+                        navigate("/user/create")
+                    }   else {
+                        navigate("/feed")
+                    }
+                });
         } catch {
             console.log("Failed to sign in user");
         }
-
     };
 
     return (

@@ -18,25 +18,49 @@ const Feed = () => {
   const [curPersonIdx, setCurPersonIdx] = useState(0);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/employees")
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/feed',
+      data: {
+        id: user.uid,
+        userType: user.uid.charAt(0) === 't'? "Team" : "Individual"
+      }
+    })
     .then(response => {
       setInfo({persons: response.data});
     })
 
   },[])
 
-  const swipeLeft = (event) => {
+  const swipeLeft = (param) => {
     // Handle button click event here
-    let newInterest = 0;
-    console.log("xxx2" + newInterest);
-    setInterest(newInterest);
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/interact/interest/',
+      data: {
+          individualID: user.uid,
+          teamID: param
+      }
+    })
+    .then(function (response) {
+      console.log(response.status);
+    });
+    
     setCurPersonIdx(curPersonIdx+1);
     console.log("cur idx: " + curPersonIdx);
   }
-  const swipeRight = (event) => {
-    let newInterest = 1;
-    console.log("xxx3" + newInterest);
-    setInterest(newInterest);
+  const swipeRight = (param) => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/interact/uninterest/',
+      data: {
+          individualID: user.uid,
+          teamID: param
+      }
+    })
+    .then(function (response) {
+      console.log(response.status);
+    });
     setCurPersonIdx(curPersonIdx+1);
     console.log("cur idx: " + curPersonIdx);
   }
@@ -59,9 +83,9 @@ const Feed = () => {
       )}
       </div>
       <div className="button-container">
-        <Button onClick={swipeLeft} button_type="Left" button_css="button-left"/>
+        <Button onClick={() => swipeLeft(info.persons[curPersonIdx].id)} button_type="Left" button_css="button-left"/>
         <Button onClick={logOut} button_type="LogOut" button_css="button-logout"/>
-        <Button onClick={swipeRight} button_type="Right" button_css="button-right"/>
+        <Button onClick={() => swipeRight(info.persons[curPersonIdx].id)} button_type="Right" button_css="button-right"/>
 
       </div>
     </div>

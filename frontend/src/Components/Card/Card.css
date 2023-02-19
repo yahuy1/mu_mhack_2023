@@ -10,6 +10,7 @@
     background-color: #1f1f1f;
     color: rgb(30, 12, 173);
     box-shadow: #333;
+    flex: 1;
   }
   
   .user-name {

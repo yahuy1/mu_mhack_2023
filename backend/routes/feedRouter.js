@@ -3,7 +3,7 @@ const router = express.Router()
 const Individual = require("../models/individualModel")
 const Team = require("../models/teamModel")
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     const id = req.body.id
     const userType = req.body.userType
     
@@ -31,9 +31,9 @@ router.get("/", async (req, res) => {
             $nin: fromObj.interacted,
             $nin: fromObj.matched,
         },
-        "techStack": {
-            $in: fromObj.techStack
-        }
+        // "techStack": {
+            // $in: fromObj.techStack
+        // }
     }).limit(10)
 
     res

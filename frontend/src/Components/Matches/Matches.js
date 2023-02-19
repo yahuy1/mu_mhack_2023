@@ -11,7 +11,8 @@ import { useUserContext } from '../../Controllers/userContext';
 function Matches() {
     const { user, logoutUser } = useUserContext();
     const navigate = useNavigate();
-    const [matched, setMatched] = useState([]);
+    const [matched, setMatched] = useState(null);
+    const [userType, setUserType] = useState(null)
     // const [matched, setMatched] = useState([
     //     {
     //         "_id": "63f15796df26f52f21cb1fd4",
@@ -54,26 +55,47 @@ function Matches() {
     //         "__v": 0
     //     }
     // ]);
-    const userType = user.uid.charAt(0) === 't'? "Team" : "Individual";
 
     useEffect(() => {
         axios({
-          method: 'post',
-          url: 'http://localhost:8080/api/user/info',
-          data: {
-            id: user.uid,
-            userType: userType
-          }
+            method: 'post',
+            url: 'http://localhost:8080/api/user/info',
+            data: {
+                id: user.uid,
+            }
         })
         .then(response => {
-          if (response.status === 204)
+            if (response.status === 204)
             console.log("No data");
-          else {
-            const matchedIDs = response.data.matched;
-            setMatched();
-          }
+            else {
+                setUserType(response.data.userType);
+            }
         })
       },[])
+
+    useEffect(() => {
+        if (userType === null) {
+            return
+        } else {
+            axios({
+                method: 'post',
+                url: 'http://localhost:8080/api/user/matched',
+                data: {
+                  id: user.uid,
+                  userType: userType
+                }
+              })
+              .then(response => {
+                if (response.status === 204)
+                  console.log("No data");
+                else {
+                  const matchedIDs = Object.values(response.data);
+                  console.log(matchedIDs)
+                  setMatched(matchedIDs);
+                }
+              })
+        }
+    }, [userType])
 
     const handleRemoveCard = id => {
         setMatched(prevMatched => prevMatched.filter(matched => matched !== id));
@@ -95,22 +117,25 @@ function Matches() {
                     <Button onClick={() => navigate("/feed")} button_type="Back to Feed" button_css="button-feed" />
                 </div>
                 <div className='cards-display'>
-                    {matched.map(obj => (
-                        <div key={obj}>
-                            <span>
-                                <IndividualCard
-                                    name={obj.name}
-                                    techStack={obj.techStack}
-                                    description={obj.description}
-                                    contacts='onlyfans.com/JohnDoe'
-                                />
-                            </span>
-                            <div className="button-container">
-                                <Button onClick={() => { swipeLeft(); handleRemoveCard(obj) }} button_type="Decline" button_css="button-left" />
-                                <Button onClick={() => { swipeRight(); handleRemoveCard(obj) }} button_type="Accept" button_css="button-right" />
+                    {(matched !== null && matched !== undefined && Array.isArray(matched))
+                        ? matched.map((obj, index) => 
+                            <div key={index}>
+                                <span>
+                                    <IndividualCard
+                                        name={obj.name}
+                                        techStack={obj.techStack.map(elem => elem.value)}
+                                        description={obj.description}
+                                        contacts='onlyfans.com/JohnDoe'
+                                    />
+                                </span>
+                                <div className="button-container">
+                                    <Button onClick={() => { swipeLeft(); handleRemoveCard(obj) }} button_type="Decline" button_css="button-left" />
+                                    <Button onClick={() => { swipeRight(); handleRemoveCard(obj) }} button_type="Accept" button_css="button-right" />
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                        : <div></div>
+                    }
                 </div>
             </>
         </div>

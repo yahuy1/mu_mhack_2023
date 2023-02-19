@@ -7,6 +7,6 @@ export default function ProtectedRouteUserProfile({ component: Component, ...res
   const { user, loading } = useUserContext();
   console.log("xxx.inside-protected-route" + user);
   return (
-    user ? <UserProfile/> : <Navigate to="/log_in" />
+    loading? <h2> Loading </h2> : user ? <UserProfile/> : <Navigate to="/log_in" />
   )
 }

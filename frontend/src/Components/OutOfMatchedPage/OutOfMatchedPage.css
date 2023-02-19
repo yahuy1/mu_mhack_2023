@@ -1,0 +1,12 @@
+.heading-container {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 50%;
+    height: 100%;
+    flex: 0;
+  }
+.button-container {
+    height: 50px;
+}

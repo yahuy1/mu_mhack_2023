@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Card from '../Card/Card';
+import { TeamCard, IndividualCard} from '../Card/Card';
 import Button from '../Button/Button';
 import './Matches.css';
 
@@ -67,7 +67,7 @@ function Matches() {
                 {matched.map(obj => (
                     <div key={obj}>
                         <span>
-                            <Card
+                            <IndividualCard
                                 name={obj.name}
                                 email='test.email@example.com'
                                 techStack={obj.techStack}

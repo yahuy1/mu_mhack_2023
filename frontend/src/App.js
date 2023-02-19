@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 
 import LogIn from './Components/LogIn/LogIn';
 import Sign_Up from './Components/Sign_Up/Sign_Up.js'
+import OutOfMatchedPage from './Components/OutOfMatchedPage/OutOfMatchedPage';
 
 import { UserContextProvider, useUserContext } from './Controllers/userContext';
 import ProtectedRouteUserProfile from './Components/ProtectedRouteUserProfile/ProtectedRouteUserProfile';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/sign_up" element={<Sign_Up />} />
             <Route path="/log_in" element={<LogIn />} />
             <Route path="/user/matches" element={<Matches />} />
+            <Route path="/outofmatched" element={<OutOfMatchedPage />} />
           </Routes>
         </UserContextProvider>
       </div>

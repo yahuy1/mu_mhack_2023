@@ -18,6 +18,9 @@ function Sign_Up() {
         console.log('Email:', email);
         console.log('Password:', password);
         // Add code to submit form data to backend here
+
+
+        
     };
     return (
         <div className="container">

@@ -10,6 +10,7 @@
     background-color: #1f1f1f;
     color: rgb(30, 12, 173);
     box-shadow: #333;
+    flex: 1;
   }
   
   .user-name {
@@ -17,7 +18,8 @@
     font-weight: bold;
     margin-bottom: 10px;
   }
-  
+
+
   .technical-skills {
     margin: 10% 0%;
   }
@@ -45,6 +47,21 @@
     font-size: 1.5rem;
   }
   
+  .member-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .member-item {
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 1.5rem;
+  }
+  
   .description {
     margin: 20px 0;
     border-top: 1px solid #ccc;
@@ -54,11 +71,15 @@
   .description-title {
     font-size: 200%;
     font-weight: bold;
-    margin-bottom: 30%;
+    margin-bottom: 10px;
   }
   
   .description-text {
     font-size: 200%;
     color: white;
+  }
+
+  .contacts {
+    color: rgb(30, 12, 173);
   }
   

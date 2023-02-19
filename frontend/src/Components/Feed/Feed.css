@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     row-gap: 50%;
     height: 100%;
+    flex: 0;
   }
   .card-container {
     height: 80%;
@@ -20,6 +21,11 @@
     margin: auto;
   }
   
+  .button-matches {
+    display: flex;
+    justify-content: center;
+    max-height: 10%;
+  }
   /* .button:hover {
     background-color: #0062cc;
   } */

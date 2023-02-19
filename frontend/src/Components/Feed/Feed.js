@@ -74,10 +74,11 @@ const Feed = () => {
     // Handle button click event here
     axios({
       method: 'post',
-      url: 'http://localhost:8080/api/interact/interest/',
+      url: 'http://localhost:8080/api/interact/uninterest/',
       data: {
           individualID: user.uid,
-          teamID: param
+          teamID: param,
+          source: userType
       }
     })
     .then(function (response) {
@@ -90,10 +91,11 @@ const Feed = () => {
   const swipeRight = (param) => {
     axios({
       method: 'post',
-      url: 'http://localhost:8080/api/interact/uninterest/',
+      url: 'http://localhost:8080/api/interact/interest/',
       data: {
           individualID: user.uid,
-          teamID: param
+          teamID: param,
+          source: userType
       }
     })
     .then(function (response) {

@@ -1,14 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const admin = require("firebase-admin");
 const Team = require("../models/teamModel")
 const Individual = require("../models/individualModel");
-
-// Initialize Firebase Admin SDK
-const serviceAccount = require("../serviceAccountKey.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+const admin = require("../fb")
 
 // Route for user sign-up
 router.post("/signup", async (req, res) => {
@@ -112,5 +106,7 @@ router.post("/info", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
+
 
 module.exports = router;

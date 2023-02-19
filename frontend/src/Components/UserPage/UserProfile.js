@@ -69,22 +69,27 @@ function UserProfile() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log('UserID', user.uid)
         console.log('Username:', username);
         console.log('UserType:', userType);
         console.log('Description:', description);
         console.log('Skills:', skills);
         console.log('Member:', member);
         console.log('Contact:', contact);
-        uid = user.uid;
         // Add code to submit form data to backend here
-        axios.post('http://localhost:5000/api/users/update', {
-            uid: uid,
-            name: username,
-            description: description,
-            techStack: skills,
-            contacts: contact,
-            userType: userType
-        })
+        try {
+            axios.post('http://localhost:8080/api/user/create', {
+                id: user.uid,
+                name: username,
+                description: description,
+                techStack: skills,
+                contacts: [contact],
+                userType: userType
+            })
+            console.log("Profile created successfully");
+        } catch (error) {
+            console.log("unable to create profile, please try again");
+        }
     };
 
     return (

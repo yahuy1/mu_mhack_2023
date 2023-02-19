@@ -5,7 +5,9 @@ import {
     onAuthStateChanged,
     signOut,
     updateProfile,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    setPersistence,
+    browserLocalPersistence,
     } from 'firebase/auth';
 import { auth } from '../Configs/firebase';
 
@@ -51,12 +53,13 @@ export const UserContextProvider = ({ children }) => {
   const signInUser = (email, password) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((res) => console.log(res))
+      .then((res) => console.log(res.user.uid))
       .catch((err) => setError(err.code))
       .finally(() => setLoading(false));
   };
 
   const logoutUser = () => {
+    console.log(auth.currentUser.uid);
     signOut(auth);
   };
 

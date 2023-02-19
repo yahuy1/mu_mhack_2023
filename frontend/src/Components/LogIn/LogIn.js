@@ -21,15 +21,15 @@ function LogIn() {
         setPassword(event.target.value);
     };
 
-    async function handleSubmit (event) {
+    function handleSubmit (event) {
         event.preventDefault();
         console.log("emailRef:" + email);
         console.log("passwordRef:" + password);
         // Add code to submit form data to backend here
         try {
             if (email && password)
-                await signInUser(email, password); 
-            navigate("/feed")
+                signInUser(email, password); 
+                navigate("/feed");
         } catch {
             console.log("Failed to sign in user");
         }

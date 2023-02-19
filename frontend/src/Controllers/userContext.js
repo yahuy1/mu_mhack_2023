@@ -37,18 +37,18 @@ export const UserContextProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const registerUser = (email, password, name) => {
-    setLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() =>
-        updateProfile(auth.currentUser, {
-          displayName: name,
-        })
-      )
-      .then((res) => console.log(res))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  };
+  // const registerUser = (email, password, name) => {
+  //   setLoading(true);
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //     .then(() =>
+  //       updateProfile(auth.currentUser, {
+  //         displayName: name,
+  //       })
+  //     )
+  //     .then((res) => console.log(res))
+  //     .catch((err) => setError(err.message))
+  //     .finally(() => setLoading(false));
+  // };
 
   const signInUser = (email, password) => {
     setLoading(true);
@@ -63,18 +63,15 @@ export const UserContextProvider = ({ children }) => {
     signOut(auth);
   };
 
-  const forgotPassword = (email) => {
-    return sendPasswordResetEmail(auth, email);
-  };
 
   const contextValue = {
     user,
     loading,
     error,
     signInUser,
-    registerUser,
-    logoutUser,
-    forgotPassword,
+//    registerUser,
+    logoutUser
+//    forgotPassword,
   };
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

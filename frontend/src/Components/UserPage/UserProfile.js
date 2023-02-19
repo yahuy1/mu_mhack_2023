@@ -82,6 +82,7 @@ function UserProfile() {
                 id: user.uid,
                 name: username,
                 description: description,
+                member: member,
                 techStack: skills,
                 contacts: [contact],
                 userType: userType

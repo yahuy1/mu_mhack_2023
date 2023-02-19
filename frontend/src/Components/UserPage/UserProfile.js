@@ -4,9 +4,11 @@ import SelectBar from './SelectBar';
 import Radio from './Radio';
 import { selectOptions } from './Data';
 import Select from "react-select";
+import axios from 'axios';
+import { useUserContext } from '../../Controllers/userContext';
 
 function UserProfile() {
-
+    const { user } = useUserContext();
     const [username, setUsername] = useState('');
     const [description, setDescription] = useState('');
     const [member, setMember] = useState([]);
@@ -73,8 +75,16 @@ function UserProfile() {
         console.log('Skills:', skills);
         console.log('Member:', member);
         console.log('Contact:', contact);
+        uid = user.uid;
         // Add code to submit form data to backend here
-
+        axios.post('http://localhost:5000/api/users/update', {
+            uid: uid,
+            name: username,
+            description: description,
+            techStack: skills,
+            contacts: contact,
+            userType: userType
+        })
     };
 
     return (

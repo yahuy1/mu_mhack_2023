@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './Sign_Up.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Sign_Up() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -24,7 +26,9 @@ function Sign_Up() {
                 email: email,
                 password: password
             })
-            console.log("Signed up succesfully")
+            console.log("Signed up succesfully");
+            navigate("/user/create");
+            
         } catch (error) {
             console.log("Unable to sign up");
         } 

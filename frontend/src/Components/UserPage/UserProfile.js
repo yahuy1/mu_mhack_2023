@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './UserProfile.css';
+import { useNavigate  } from 'react-router-dom';
 import SelectBar from './SelectBar';
 import Radio from './Radio';
 import { selectOptions } from './Data';
@@ -15,6 +16,9 @@ function UserProfile() {
     const [contact, setContact] = useState('');
     const [userType, setUserType] = useState('');
     const [skills, setSkills] = useState([]);
+
+    const navigate = useNavigate();
+
     const customStyles = {
         control: (base, state) => ({
             ...base,
@@ -90,6 +94,7 @@ function UserProfile() {
         } catch (error) {
             console.log("unable to create profile, please try again");
         }
+        navigate("/feed");
     };
 
     return (

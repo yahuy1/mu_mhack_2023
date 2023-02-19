@@ -16,12 +16,12 @@ function App() {
     <Router>
       <div className="App">
         <UserContextProvider>
-          <Routes>
-            {/* {loading ?  <h2> Loading </h2>: user ? <Route path="/" element={<Navigate to="/feed" />} /> : <Route path="/" element={<Navigate to="/log_in" />} />} */}
+          <Routes>            
             <Route
               path="/feed"
               element={<ProtectedRouteFeed />}
             />
+            <Route path="/" element={<Navigate to="/feed" />}/>
             <Route path="/user/create" element={<ProtectedRouteUserProfile/>}/>
             <Route path="/sign_up" element={<Sign_Up />} />
             <Route path="/log_in" element={<LogIn />} />

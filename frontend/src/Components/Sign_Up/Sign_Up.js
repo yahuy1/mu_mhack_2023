@@ -27,9 +27,14 @@ function Sign_Up() {
                 email: email,
                 password: password
             })
-            console.log("Signed up succesfully");
-
-            navigate("/user/create");
+            .then(function (response) {
+                if (response.status === 400)
+                    console.log("Sign up failed")
+                else {
+                    console.log("Sign up successfully!")
+                    navigate("/user/create");
+                }
+            }) 
             
         } catch (error) {
             console.log("Unable to sign up");

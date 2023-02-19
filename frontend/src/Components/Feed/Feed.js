@@ -27,7 +27,10 @@ const Feed = () => {
       }
     })
     .then(response => {
-      setInfoQueue({persons: response.data});
+      if (response.status === 204)
+        console.log("No data");
+      else
+        setInfoQueue({persons: response.data});
     })
 
   },[])

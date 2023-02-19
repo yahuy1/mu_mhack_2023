@@ -42,7 +42,12 @@ function UserProfile() {
           }),
     };
 
-
+    const handleMemberChange = (event) => {
+        const inputString = event.target.value;
+        const trimmedInput = inputString.trim();
+        const inputArray = trimmedInput.split(/\s*,\s*/).map((item) => item.trim());
+        setMember(inputArray);
+    };
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -52,9 +57,6 @@ function UserProfile() {
         setUserType(event.target.value);
     }
 
-    const handleMemberChange = (event) => {
-        setMember(event.target.value);
-    }
 
     const handleSkillsChange = (selected) => {
         console.log("Skill: " + selected[0]);
@@ -90,11 +92,19 @@ function UserProfile() {
                 contacts: [contact],
                 userType: userType
             })
-            console.log("Profile created successfully");
+            .then(function(response) {
+                if (response.status === 400)
+                    console.log("unable to create profile, please try again")
+                else {
+                    console.log("Profile created successfully");
+                    navigate("/feed");
+                }
+            })
+            
         } catch (error) {
             console.log("unable to create profile, please try again");
         }
-        navigate("/feed");
+        
     };
 
     return (

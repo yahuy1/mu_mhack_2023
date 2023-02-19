@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import { selectOptions } from './Data';
 import Select from "react-select";
 
-const SelecBar = () => {
+const SelectBar = () => {
     const customStyles = {
         control: (base, state) => ({
             ...base,

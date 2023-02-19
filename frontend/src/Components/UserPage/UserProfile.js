@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './UserProfile.css';
+import SelectBar from './SelectBar';
 import Radio from './Radio';
 
 function UserProfile() {

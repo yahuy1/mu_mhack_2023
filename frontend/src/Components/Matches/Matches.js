@@ -5,11 +5,51 @@ import './Matches.css';
 
 function Matches() {
 
-    const n = 10;
-    const [cards, setCards] = useState(Array.from({ length: n }, (_, i) => i + 1));
+    const [matched, setMatched] = useState([
+        {
+            "_id": "63f15796df26f52f21cb1fd4",
+            "id": "t446",
+            "name": "UC Revolution",
+            "member": [],
+            "techStack": [
+                "react",
+                "bulul"
+            ],
+            "description": "kaka",
+            "interests": [],
+            "searching": true,
+            "matched": [],
+            "contacts": [
+                "333",
+                "312"
+            ],
+            "interacted": [],
+            "__v": 0
+        },
+        {
+            "_id": "63f15796df26f52f21cb1fd4",
+            "id": "t446",
+            "name": "UC Revolution 2",
+            "member": [],
+            "techStack": [
+                "react",
+                "bulul"
+            ],
+            "description": "kaka",
+            "interests": [],
+            "searching": true,
+            "matched": [],
+            "contacts": [
+                "333",
+                "312"
+            ],
+            "interacted": [],
+            "__v": 0
+        }
+    ]);
 
     const handleRemoveCard = id => {
-        setCards(prevCard => prevCard.filter(cards => cards !== id));
+        setMatched(prevMatched => prevMatched.filter(matched => matched !== id));
     }
 
     const swipeLeft = (event) => {
@@ -24,20 +64,20 @@ function Matches() {
         <div className='matches-container'>
             <h1>Your matches uwu</h1>
             <div className='cards-display'>
-                {cards.map(index => (
-                    <div key={index}>
+                {matched.map(obj => (
+                    <div key={obj}>
                         <span>
                             <Card
-                                name='John Doe'
+                                name={obj.name}
                                 email='test.email@example.com'
-                                techStack={['C#', 'Python', 'React', 'Node']}
-                                description='When you run infront of car you get tired. When you run behind car you get exhausted'
+                                techStack={obj.techStack}
+                                description={obj.description}
                                 contacts='onlyfans.com/JohnDoe'
                             />
                         </span>
                         <div className="button-container">
-                            <Button onClick={() => {swipeLeft(); handleRemoveCard(index)}} button_type="Decline" button_css="button-left" />
-                            <Button onClick={() => {swipeRight(); handleRemoveCard(index)}} button_type="Accept" button_css="button-right" />
+                            <Button onClick={() => {swipeLeft(); handleRemoveCard(obj)}} button_type="Decline" button_css="button-left" />
+                            <Button onClick={() => {swipeRight(); handleRemoveCard(obj)}} button_type="Accept" button_css="button-right" />
                         </div>
                     </div>
                 ))}

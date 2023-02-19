@@ -9,8 +9,7 @@ import Sign_Up from './Components/Sign_Up/Sign_Up.js'
 
 import { UserContextProvider, useUserContext } from './Controllers/userContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
-import UserProfile from './Components/UserProfile/UserProfile';
-
+import UserProfile from './Components/UserPage/UserProfile';
 
 function App() {
   const { user, loading } = useUserContext();
@@ -26,7 +25,7 @@ function App() {
             />
             <Route path="/sign_up" element={<Sign_Up />} />
             <Route path="/log_in" element={<LogIn />} />
-            <Route path="/user" element={<UserProfile />} />
+            <Route path="/user/create" element={<UserProfile />} />
           </Routes>
         </UserContextProvider>
       </div>

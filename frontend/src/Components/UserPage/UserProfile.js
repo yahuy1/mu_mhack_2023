@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './UserProfile.css';
 import SelectBar from './SelectBar';
 import Radio from './Radio';
+import { selectOptions } from './Data';
+import Select from "react-select";
 
 function UserProfile() {
 
@@ -9,30 +11,71 @@ function UserProfile() {
     const [description, setDescription] = useState('');
     const [member, setMember] = useState([]);
     const [contact, setContact] = useState('');
+    const [userType, setUserType] = useState('');
+    const [skills, setSkills] = useState([]);
+    const customStyles = {
+        control: (base, state) => ({
+            ...base,
+            background: "#0a0a23",
+            border: 0,
+            boxShadow: 'none'
+        }),
+        menu: base => ({
+            ...base,
+            marginTop: 0
+        }),
+        menuList: base => ({
+            ...base,
+            background: "#adaded",
+            color: 'black',
+            padding: 0
+        }),
+        input: base => ({
+            ...base,
+            color: 'white',
+          }),
+    };
+
 
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     }
 
-    const handleDescriptionChange = (event) => {
-        setDescription(event.target.value);
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Username:', username);
-        console.log('Description:', description);
-        // Add code to submit form data to backend here
-    };
-
-    const handleContactChange = (event) => {
-        setContact(event.target.value);
+    const handleUserTypeChange = (event) => {
+        setUserType(event.target.value);
     }
 
     const handleMemberChange = (event) => {
         setMember(event.target.value);
     }
+
+    const handleSkillsChange = (selected) => {
+        console.log("Skill: " + selected[0]);
+        setSkills(selected);
+    };
+
+    const handleDescriptionChange = (event) => {
+        setDescription(event.target.value);
+    }
+
+    const handleContactChange = (event) => {
+        setContact(event.target.value);
+    }
+
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('Username:', username);
+        console.log('UserType:', userType);
+        console.log('Description:', description);
+        console.log('Skills:', skills);
+        console.log('Member:', member);
+        console.log('Contact:', contact);
+        // Add code to submit form data to backend here
+
+    };
 
     return (
         <div className="container">
@@ -40,7 +83,8 @@ function UserProfile() {
             <p>Please fill out this form with the required information</p>
             <form onSubmit={handleSubmit}>
                 <fieldset>
-                    <label>Username: 
+                    {/*Username components*/}
+                    <label>Username:
                         <input
                             type="text"
                             name="user-name"
@@ -48,9 +92,36 @@ function UserProfile() {
                             required
                         />
                     </label>
-
-                    <label> Participating as: <Radio /></label>
-
+                    {/* Radio Button element*/}
+                    <label> Participating as:
+                        <div className='radio-group'>
+                            <div id='radio-btn1'>
+                                <input
+                                    name="Individual"
+                                    type="radio"
+                                    value="Individual"
+                                    onChange={handleUserTypeChange}
+                                    checked={userType === 'Individual'}
+                                />
+                                <label htmlFor="Individual">
+                                    Individual
+                                </label>
+                            </div>
+                            <div id='radio-btn2'>
+                                <input
+                                    name="Team"
+                                    type="radio"
+                                    value="Team"
+                                    onChange={handleUserTypeChange}
+                                    checked={userType === 'Team'}
+                                />
+                                <label htmlFor="Team">
+                                    Team
+                                </label>
+                            </div>
+                        </div>
+                    </label>
+                    {/*Member components*/}
                     <label> Members
                         <input
                             defaultValue=""
@@ -59,9 +130,18 @@ function UserProfile() {
                             onChange={handleMemberChange}
                         />
                     </label>
-
-                    <label className='skill-label'>Technical Skills: <SelectBar /></label>
-
+                    {/*Skill components*/}
+                    <label className='skill-label'>Technical Skills:
+                        <Select
+                            isSearchable
+                            styles={customStyles}
+                            isMulti
+                            options={selectOptions}
+                            onChange={handleSkillsChange}
+                            value={skills}
+                        />
+                    </label>
+                    {/*Description components*/}
                     <label>A short description about yourself:
                         <textarea
                             defaultValue='Eat ass'
@@ -71,7 +151,7 @@ function UserProfile() {
                             onChange={handleDescriptionChange}
                         />
                     </label>
-
+                    {/*Contact components*/}
                     <label>Discord:
                         <input
                             type="text"

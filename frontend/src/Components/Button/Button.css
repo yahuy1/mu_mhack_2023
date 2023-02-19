@@ -12,10 +12,11 @@
   }
 
   .button-right {
-    background-color: chartreuse;
+    background-color: rgb(101, 156, 45);
     width: 50%;
     height: 20%;
-    padding: 10% 10%;
+    margin: auto;
+    padding: 10% 0px;
     border-radius: 5%;
     color: #fff;
     font-size: 2rem;
@@ -28,7 +29,8 @@
     background-color: crimson;
     width: 50%;
     height: 20%;
-    padding: 10% 10%;
+    margin:auto;
+    padding: 10% 0px;
     border-radius: 5%;
     color: #fff;
     font-size: 2rem;
@@ -38,7 +40,7 @@
   }
 
   .button-logout {
-    background-color: rgb(67, 80, 82);
+    background-color: rgb(82, 76, 67);
     width: 70%;
     height: 20%;
     padding: 10% 10%;
@@ -50,6 +52,31 @@
     transition: all 0.3s ease;
   }
   
+  .button-matched {
+    background-color: rgb(101, 156, 45);
+    margin: auto;
+    padding: 1% 10px;
+    border-radius: 5%;
+    color: #fff;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+  }
   .button:hover {
     background-color: #0062cc;
+  }
+
+  .button-feed {
+    background-color: rgb(67, 80, 82);
+    width: 50%;
+    height: 20%;
+    padding: 3% 3%;
+    border-radius: 5%;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import './Sign_Up.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from '../../Controllers/userContext';
 
 
 function Sign_Up() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { signInUser } = useUserContext();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -27,9 +29,15 @@ function Sign_Up() {
                 email: email,
                 password: password
             })
-            console.log("Signed up succesfully");
-
-            navigate("/user/create");
+            .then(function (response) {
+                if (response.status === 400)
+                    console.log("Sign up failed")
+                else {
+                    signInUser(email, password);
+                    console.log("Sign up successfully!")
+                    navigate("/user/create");
+                }
+            }) 
             
         } catch (error) {
             console.log("Unable to sign up");

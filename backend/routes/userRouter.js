@@ -105,9 +105,16 @@ router.post("/info", async (req, res) => {
   
   try {
     const user = await (fromCollection.findOne({ id: id }))
-    res
-      .status(201)
-      .json(user)
+    if (user) {
+      res
+        .status(201)
+        .json(user)
+    }
+    else {
+      res
+        .status(204)
+        .json(user)
+    }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

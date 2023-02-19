@@ -21,6 +21,11 @@
     margin: auto;
   }
   
+  .button-matches {
+    display: flex;
+    justify-content: center;
+    max-height: 10%;
+  }
   /* .button:hover {
     background-color: #0062cc;
   } */

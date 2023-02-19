@@ -98,15 +98,48 @@ router.post("/info", async (req, res) => {
   const fromCollection = (req.body.userType === "Team") ? Team : Individual
   
   try {
-    const user = await (fromCollection.findOne({ id: id }))
-    res
-      .status(201)
-      .json(user)
+    let user = await (Team.findOne({ id: id }))
+
+    if (user !== null) {
+      res.status(201).json({user, userType: "Team"})
+      return
+    } 
+    
+    user = await (Individual.findOne({ id: id }))
+
+    if (user !== null) {
+      res.status(201).json({user, userType: "Individual"})
+    } else {
+      res.status(204).json({message: "Invalid ID"})
+    }
+
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res
+      .status(400)
+      .json({ message: err.message });
   }
 });
 
+router.post("/matched", async (req, res) => {
+  const id = req.body.id
+  const fromCollection = (req.body.userType === "Team") ? Team : Individual
+  const toCollection = (req.body.userType === "Individual") ? Team : Individual
 
+  try {
+    const user = await fromCollection.findOne({ id: id })
+    const matches = await toCollection.find({
+      "id": {
+        $in: user.matched
+      }
+    })
+    res
+      .status(201)
+      .json(matches)
+  } catch (err) {
+    res
+      .status(400)
+      .json({ message: err.message });
+  }
+})
 
 module.exports = router;

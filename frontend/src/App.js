@@ -10,11 +10,8 @@ import OutOfMatchedPage from './Components/OutOfMatchedPage/OutOfMatchedPage';
 import { UserContextProvider, useUserContext } from './Controllers/userContext';
 import ProtectedRouteUserProfile from './Components/ProtectedRouteUserProfile/ProtectedRouteUserProfile';
 import ProtectedRouteFeed from './Components/ProtectedRouteFeed/ProtectedRouteFeed';
-<<<<<<< HEAD
 import UserProfile from './Components/UserPage/UserProfile';
-=======
 import Matches from './Components/Matches/Matches';
->>>>>>> frontend
 
 function App() {
   return (

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import './Sign_Up.css'
+import './Sign_Up.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Sign_Up() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -14,6 +17,7 @@ function Sign_Up() {
     };
 
     const handleSubmit = (event) => {
+<<<<<<< HEAD
         event.preventDefault();
         console.log('Email:', email);
         console.log('Password:', password);
@@ -21,7 +25,25 @@ function Sign_Up() {
 
 
         
+=======
+        try {
+            event.preventDefault();
+            console.log('Email:', email);
+            console.log('Password:', password);
+            // Add code to submit form data to backend here
+            axios.post('http://localhost:8080/api/user/signup', {
+                email: email,
+                password: password
+            })
+            console.log("Signed up succesfully");
+            navigate("/user/create");
+            
+        } catch (error) {
+            console.log("Unable to sign up");
+        } 
+>>>>>>> backend-duong
     };
+    
     return (
         <div className="container">
             <h1>Registration Form</h1>

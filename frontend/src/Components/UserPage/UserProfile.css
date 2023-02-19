@@ -79,3 +79,22 @@ body {
   label {
     margin-bottom: 20px;
   }
+
+  .radio-group {
+    display: flex;
+    flex-direction: row;
+    grid-column: 2;
+    width: 75%;
+    column-gap: 130px;
+    align-items: center;
+  }
+  
+  #radio-btn1{
+    padding-left: 115px;
+    align-items: center;
+  }
+
+  #radio-btn2 {
+    margin-right: auto;
+    align-items: center;
+  }

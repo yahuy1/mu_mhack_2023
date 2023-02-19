@@ -10,7 +10,7 @@ function Radio() {
 
     return (
         <div className='radio-group'>
-            <div className='radio-btn'>
+            <div id='radio-btn1'>
                 <input
                     name="individual"
                     type="radio"
@@ -22,7 +22,7 @@ function Radio() {
                     Individual
                 </label>
             </div>
-            <div className='radion-btn'>
+            <div id='radio-btn2'>
                 <input
                     name="team"
                     type="radio"
@@ -30,8 +30,8 @@ function Radio() {
                     onChange={handleUserTypeChange}
                     checked={userType === 'team'}
                 />
-                <label htmlFor="team">
-                    Radio Item 1
+                <label htmlFor="individual">
+                    Members
                 </label>
             </div>
         </div>

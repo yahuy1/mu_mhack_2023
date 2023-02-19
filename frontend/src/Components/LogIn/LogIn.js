@@ -28,8 +28,9 @@ function LogIn() {
         // Add code to submit form data to backend here
         try {
             if (email && password)
-                signInUser(email, password); 
-                navigate("/feed")
+                signInUser(email, password);
+                
+                navigate("/feed");
         } catch {
             console.log("Failed to sign in user");
         }

@@ -4,7 +4,6 @@ import { TeamCard, IndividualCard } from '../Card/Card';
 import Button from '../Button/Button';
 import axios from 'axios'
 
-
 import { useUserContext } from '../../Controllers/userContext';
 import { Navigate, useNavigate, redirect } from "react-router-dom";
 
@@ -18,7 +17,7 @@ const Feed = () => {
   });
 
   const userType = user.uid.charAt(0) === 't'? "Team" : "Individual";
-  
+  console.log("in feed, current user: ", user);
   useEffect(() => {
     axios({
       method: 'post',

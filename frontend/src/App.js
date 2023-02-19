@@ -19,11 +19,8 @@ function App() {
       <div className="App">
         <UserContextProvider>
           <Routes>            
-            <Route
-              path="/feed"
-              element={<ProtectedRouteFeed />}
-            />
-            <Route path="/user/create" element={<ProtectedRouteUserProfile/>}/>
+            <Route path="/feed" element={<ProtectedRouteFeed />} />
+            <Route path="/user/create" element={<ProtectedRouteUserProfile />} />
             <Route path="/sign_up" element={<Sign_Up />} />
             <Route path="/log_in" element={<LogIn />} />
             <Route path="/user/matches" element={<Matches />} />

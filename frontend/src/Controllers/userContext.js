@@ -5,7 +5,9 @@ import {
     onAuthStateChanged,
     signOut,
     updateProfile,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    setPersistence,
+    browserLocalPersistence,
     } from 'firebase/auth';
 import { auth } from '../Configs/firebase';
 
@@ -57,6 +59,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    console.log(auth.currentUser.uid);
     signOut(auth);
   };
 

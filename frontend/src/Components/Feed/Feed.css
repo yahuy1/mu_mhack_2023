@@ -1,4 +1,5 @@
   .container {
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -14,14 +15,14 @@
     justify-content: center;
     height: 10%;
     width: 20%;
-    column-gap: 20px;
+    column-gap: 10%;
     align-items: center;
     margin: auto;
   }
   
-  .button:hover {
+  /* .button:hover {
     background-color: #0062cc;
-  }
+  } */
   /* #left-button {
     background-color: crimson !important;
   }

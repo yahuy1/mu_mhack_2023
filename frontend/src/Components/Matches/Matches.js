@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Card from '../Card/Card';
+import { IndividualCard } from '../Card/Card';
 import Button from '../Button/Button';
 import './Matches.css';
+import { useNavigate } from 'react-router-dom';
 
 function Matches() {
 
+    const navigate = useNavigate();
     const [matched, setMatched] = useState([
         {
             "_id": "63f15796df26f52f21cb1fd4",
@@ -62,26 +64,30 @@ function Matches() {
 
     return (
         <div className='matches-container'>
-            <h1>Your matches uwu</h1>
-            <div className='cards-display'>
-                {matched.map(obj => (
-                    <div key={obj}>
-                        <span>
-                            <Card
-                                name={obj.name}
-                                email='test.email@example.com'
-                                techStack={obj.techStack}
-                                description={obj.description}
-                                contacts='onlyfans.com/JohnDoe'
-                            />
-                        </span>
-                        <div className="button-container">
-                            <Button onClick={() => {swipeLeft(); handleRemoveCard(obj)}} button_type="Decline" button_css="button-left" />
-                            <Button onClick={() => {swipeRight(); handleRemoveCard(obj)}} button_type="Accept" button_css="button-right" />
+            <>
+                <h1>Your Matches</h1>
+                <div className='back-button'>
+                    <Button onClick={() => navigate("/feed")} button_type="Back to Feed" button_css="button-feed" />
+                </div>
+                <div className='cards-display'>
+                    {matched.map(obj => (
+                        <div key={obj}>
+                            <span>
+                                <IndividualCard
+                                    name={obj.name}
+                                    techStack={obj.techStack}
+                                    description={obj.description}
+                                    contacts='onlyfans.com/JohnDoe'
+                                />
+                            </span>
+                            <div className="button-container">
+                                <Button onClick={() => { swipeLeft(); handleRemoveCard(obj) }} button_type="Decline" button_css="button-left" />
+                                <Button onClick={() => { swipeRight(); handleRemoveCard(obj) }} button_type="Accept" button_css="button-right" />
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </>
         </div>
     );
 }

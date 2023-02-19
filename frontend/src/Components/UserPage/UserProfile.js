@@ -53,7 +53,7 @@ function UserProfile() {
     }
 
     const handleMemberChange = (event) => {
-        setMember(event.target.value);
+        setMember(event.target.value.split(','))
     }
 
     const handleSkillsChange = (selected) => {
@@ -164,7 +164,7 @@ function UserProfile() {
                     {/*Description components*/}
                     <label>A short description about yourself:
                         <textarea
-                            defaultValue='Eat ass'
+                            defaultValue=''
                             name="user-description"
                             rows={5}
                             wrap="hard"

@@ -55,3 +55,16 @@
   .button:hover {
     background-color: #0062cc;
   }
+
+  .button-feed {
+    background-color: rgb(67, 80, 82);
+    width: 50%;
+    height: 20%;
+    padding: 3% 3%;
+    border-radius: 5%;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }

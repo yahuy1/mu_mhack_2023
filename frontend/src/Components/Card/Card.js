@@ -1,14 +1,17 @@
 import React from 'react';
 import './Card.css';
+import axios from 'axios'
 
-const Card = ({ name, skills, description }) => {
+const Card = ({ name, email, techStack, description, contacts }) => {
+  
+
   return (
     <div className="user-container">
       <div className="user-name">{name}</div>
       <div className="technical-skills">
         <div className="skills-title">Technical Skills</div>
         <div className="skills-list">
-          {skills.map((skill, index) => (
+          {techStack.map((skill, index) => (
             <div key={index} className="skill-item">
               {skill}
             </div>

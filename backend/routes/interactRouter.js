@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Individual = require("../models/individualModel")
 const Team = require("../models/teamModel")
+const admin = require("../fb")
 
 router.post("/interest", async (req, res) => {
     const teamID = req.body.teamID
@@ -27,6 +28,48 @@ router.post("/interest", async (req, res) => {
 
             await fromObj.save()
             await toObj.save()
+
+            const toUser = await admin.auth().getUser(toObj.id)
+            const fromUser = await admin.auth().getUser(fromObj.id)
+
+            const sgMail = require('@sendgrid/mail')
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+            const msg1 = {
+                to: toUser.email, // Change to your recipient
+                from: 'lkuroshirol123@gmail.com', // Change to your verified sender
+                subject: 'New Match',
+                text: 'You got a new match',
+                html: '<strong>You got a new match</strong>',
+            }
+
+            const msg2 = {
+                to: fromUser.email, // Change to your recipient
+                from: 'lkuroshirol123@gmail.com', // Change to your verified sender
+                subject: 'New Match',
+                text: 'You got a new match',
+                html: '<strong>You got a new match</strong>',
+            }
+
+            sgMail
+                .send(msg1)
+                .then((response) => {
+                    console.log(response[0].statusCode)
+                    console.log(response[0].headers)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+
+            sgMail
+                .send(msg2)
+                .then((response) => {
+                    console.log(response[0].statusCode)
+                    console.log(response[0].headers)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
 
             res
                 .status(201)

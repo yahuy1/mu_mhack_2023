@@ -18,7 +18,14 @@ const Feed = () => {
   const [curPersonIdx, setCurPersonIdx] = useState(0);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/employees")
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/feed',
+      data: {
+        id: "t444",
+        userType: "Team"
+      }
+    })
     .then(response => {
       setInfo({persons: response.data});
     })

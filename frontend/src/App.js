@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+// import axios from 'axios'
 
 import Feed from './Components/Feed/Feed.js'
 import LogIn from './Components/LogIn/LogIn';
@@ -10,13 +11,15 @@ import { UserContextProvider, useUserContext } from './Controllers/userContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import UserProfile from './Components/UserProfile/UserProfile';
 
+
 function App() {
-  const { user } = useUserContext();
+  const { user, loading } = useUserContext();
   return (
     <Router>
       <div className="App">
         <UserContextProvider>
           <Routes>
+            {/* {loading ?  <h2> Loading </h2>: user ? <Route path="/" element={<Navigate to="/feed" />} /> : <Route path="/" element={<Navigate to="/log_in" />} />} */}
             <Route
               path="/feed"
               element={<ProtectedRoute />}

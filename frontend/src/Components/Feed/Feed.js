@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './Feed.css'
-import Card from '../Card/Card';
+import { TeamCard, IndividualCard } from '../Card/Card';
 import Button from '../Button/Button';
 import axios from 'axios'
 
@@ -14,6 +14,8 @@ const Feed = () => {
   const [infoQueue, setInfoQueue] = useState({
     persons: []
   });
+
+  const userType = user.uid.charAt(0) === 't'? "Team" : "Individual";
   
   useEffect(() => {
     axios({
@@ -21,7 +23,7 @@ const Feed = () => {
       url: 'http://localhost:8080/api/feed',
       data: {
         id: user.uid,
-        userType: user.uid.charAt(0) === 't'? "Team" : "Individual"
+        userType: userType
       }
     })
     .then(response => {
@@ -55,7 +57,7 @@ const Feed = () => {
       url: 'http://localhost:8080/api/feed/',
       data: {
           id: user.uid,
-          userType: user.uid.charAt(0) === 't'? "Team" : "Individual"
+          userType: userType
       }
     })
     .then(function (response) {
@@ -104,13 +106,20 @@ const Feed = () => {
     <div className="container">
       <div className="card-container">
       {infoQueue.persons.length !== 0 && (
-        <Card
+        userType === "Team" ?
+        <TeamCard
           name={infoQueue.persons[0].name}
-          email={infoQueue.persons[0].email}
+          member={infoQueue.persons[0].member}
           techStack={infoQueue.persons[0].techStack}
           description={infoQueue.persons[0].description}
           contacts={infoQueue.persons[0].contacts}
         />
+        : <IndividualCard
+        name={infoQueue.persons[0].name}
+        techStack={infoQueue.persons[0].techStack}
+        description={infoQueue.persons[0].description}
+        contacts={infoQueue.persons[0].contacts}
+      />
       )}
       </div>
       <div className="button-container">

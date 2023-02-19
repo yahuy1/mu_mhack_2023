@@ -34,7 +34,6 @@ const Feed = () => {
       else
         setInfoQueue({persons: response.data});
     })
-
   },[])
 
   const removePerson = (index) => {

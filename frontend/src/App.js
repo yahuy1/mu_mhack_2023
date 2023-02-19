@@ -10,6 +10,7 @@ import OutOfMatchedPage from './Components/OutOfMatchedPage/OutOfMatchedPage';
 import { UserContextProvider, useUserContext } from './Controllers/userContext';
 import ProtectedRouteUserProfile from './Components/ProtectedRouteUserProfile/ProtectedRouteUserProfile';
 import ProtectedRouteFeed from './Components/ProtectedRouteFeed/ProtectedRouteFeed';
+import UserProfile from './Components/UserPage/UserProfile';
 import Matches from './Components/Matches/Matches';
 
 function App() {
@@ -22,7 +23,6 @@ function App() {
               path="/feed"
               element={<ProtectedRouteFeed />}
             />
-            <Route path="/" element={<Navigate to="/feed" />}/>
             <Route path="/user/create" element={<ProtectedRouteUserProfile/>}/>
             <Route path="/sign_up" element={<Sign_Up />} />
             <Route path="/log_in" element={<LogIn />} />

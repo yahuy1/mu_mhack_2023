@@ -7,13 +7,13 @@ const admin = require("../fb")
 router.post("/interest", async (req, res) => {
     const teamID = req.body.teamID
     const individualID = req.body.individualID
-    const source = req.body.source
+    const userType = req.body.userType
 
     try {
         let fromObj = await Individual.findOne({ id: individualID })
         let toObj = await Team.findOne({ id: teamID })
 
-        if (source === "Team") {
+        if (userType === "Team") {
             let temp = fromObj
             fromObj = toObj
             toObj = temp
@@ -99,13 +99,13 @@ router.post("/interest", async (req, res) => {
 router.post("/uninterest", async (req, res) => {
     const teamID = req.body.teamID
     const individualID = req.body.individualID
-    const source = req.body.source
+    const userType = req.body.userType
 
     try {
         let fromObj = await Individual.findOne({ id: individualID })
         let toObj = await Team.findOne({ id: teamID })
 
-        if (source === "Team") {
+        if (userType === "Team") {
             let temp = fromObj
             fromObj = toObj
             toObj = temp

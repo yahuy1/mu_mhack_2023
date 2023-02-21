@@ -1,4 +1,5 @@
 # TinderHack
+### Demo video: [link](https://youtu.be/X1gCdiHOfqY)
 ## Overview
 Project name: TinderHack <br>
 Project description: Our app allows users who participate in a hackathon to connect with each other and form teams in a quick and interactive manner. Users will be able to see any teams that match their interests and skills that are still looking for additional members and vice versa.
